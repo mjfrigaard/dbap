@@ -17,26 +17,22 @@
 #'
 #' @export df_skim
 #'
-#' @importFrom skimr skim_with skim
+#' @importFrom skimr skim_with skim sfl
 #' @examples
 #' require(dplyr)
-#' df_skim(mtcars)
 #' df_skim(dplyr::starwars)
 df_skim <- function(df) {
   skims <- list(numeric =
-                sfl(min = ~ min(., na.rm = TRUE),
-                    med = ~ median(., na.rm = TRUE),
-                    p0 = NULL, p25 = NULL, p50 = NULL,
-                    p75 = NULL, p100 = NULL,
-                    max = ~ max(., na.rm = TRUE)),
+                    skimr::sfl(min = ~ min(., na.rm = TRUE),
+                               med = ~ median(., na.rm = TRUE),
+                               max = ~ max(., na.rm = TRUE),
+                               p0 = NULL, p25 = NULL, p50 = NULL,
+                               p75 = NULL, p100 = NULL),
                 factor =
-                    sfl(complete_rate = NULL,
-                        ordered = NULL),
+                    skimr::sfl(ordered = NULL),
                 character =
-                    sfl(complete_rate = NULL,
-                        min = NULL, max = NULL,
-                        whitespace = NULL)
-    )
+                    skimr::sfl(min = NULL, max = NULL,
+                               whitespace = NULL))
   df_skim <- skimr::skim_with(!!!skims)
   df_skim(df)
 }

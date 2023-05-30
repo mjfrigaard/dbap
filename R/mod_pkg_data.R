@@ -12,7 +12,6 @@ mod_pkg_data_ui <- function(id) {
   df_pkgs <- get_pkgs_with_dfs()
   ns <- shiny::NS(id)
   shiny::tagList(
-  shiny::code("pkg data"),
   shiny::selectInput(ns("pkg"),
     label = "Select a package",
     choices = df_pkgs),

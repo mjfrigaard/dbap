@@ -11,6 +11,5 @@ The custom \code{skimr::skim_with()}
 }
 \examples{
 require(dplyr)
-df_skim(mtcars)
 df_skim(dplyr::starwars)
 }

@@ -1,15 +1,15 @@
 {
     "dialog-state": {
-        "query": "tsap",
+        "query": "filter_vars_fun",
         "path": "",
         "regex": false,
         "caseSensitive": true,
         "wholeWord": false,
         "filePatterns": [],
-        "useGitGrep": false,
+        "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 25,
+        "resultsCount": 9,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true

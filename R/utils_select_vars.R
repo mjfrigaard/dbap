@@ -5,11 +5,11 @@
 #' `is.character`, `is.logical`, etc.)
 #'
 #' @return data.frame/tibble filtered by function
-#' @export filter_vars_fun
+#' @export pull_type_cols
 #'
 #' @importFrom rlang as_function
 #'
-filter_vars_fun <- function(data, filter) {
+pull_type_cols <- function(data, filter) {
   fun <- rlang::as_function(filter)
   stopifnot(is.data.frame(data))
   stopifnot(is.function(fun))

@@ -10,7 +10,6 @@
 mod_select_vars_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-  shiny::code("select vars"),
   shiny::selectInput(
     ns("fun"),
     label = "Filter by",
@@ -43,7 +42,7 @@ mod_select_vars_server <- function(id, pkg_data) {
   shiny::moduleServer(id, function(input, output, session) {
 
       shiny::observe({
-        filtered <- filter_vars_fun(
+        filtered <- pull_type_cols(
                               data = pkg_data(),
                               filter =  input$fun)
          shiny::updateSelectizeInput(session,
