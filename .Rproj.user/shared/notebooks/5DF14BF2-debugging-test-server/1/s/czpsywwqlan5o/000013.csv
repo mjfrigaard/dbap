@@ -1,0 +1,9 @@
+"0","invisible(subset(mtcars, {cst(); cyl == 6}))
+"
+"1","[90m    [39m▆
+[90m 1. [39m├─[1mbase[22m::subset(...)
+[90m 2. [39m└─base::subset.data.frame(...)
+[90m 3. [39m  └─base::eval(e, x, parent.frame())
+[90m 4. [39m    └─base::eval(e, x, parent.frame())
+[90m 5. [39m      └─[1mlobstr[22m::cst()
+"

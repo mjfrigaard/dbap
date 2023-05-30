@@ -1,0 +1,32 @@
+---
+title: "Exploring modules with lobstr"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+vignette: >
+  %\VignetteIndexEntry{Exploring modules with lobstr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = FALSE,
+  comment = "\t",
+  error = TRUE
+)
+```
+
+# Overview 
+
+This vignette is an attempt to use the [`lobstr` package](https://lobstr.r-lib.org/index.html) to view module functions.
+
+```{r pkgs, message=FALSE, warning=FALSE}
+library(dbap)
+library(lobstr)
+library(NHANES)
+library(palmerpenguins)
+library(fs)
+library(shiny)
+```
