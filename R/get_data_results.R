@@ -57,7 +57,6 @@ get_data_results <- function(pkg, allClass=FALSE,
 		cl <- class(data)
 		if (length(cl) > 1 && !allClass) cl[length(cl)] else cl
 	}
-	# browser() # start debug mode!
 	ds$dim <- unlist(lapply(seq_len(nrow(ds)), getDim ))
 	ds$class <- unlist(lapply(seq_len(nrow(ds)), getClass ))
 	if (!is.null(maxTitle)) ds$Title <- substr(ds$Title, 1, maxTitle)
@@ -66,7 +65,7 @@ get_data_results <- function(pkg, allClass=FALSE,
 	else
 		ds[c('Item','class','dim','Title')]
 }
-get_data_results("lubridate", incPackage = TRUE)
+
 
 
 # dsitems <- data(package = "dplyr")$results
