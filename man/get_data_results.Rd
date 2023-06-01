@@ -27,3 +27,7 @@ metadata table of data object
 \description{
 Re-worked version of datasets() from (vcdExtra)
 }
+\examples{
+get_data_results("lubridate", incPackage = TRUE)
+get_data_results("dplyr", incPackage = TRUE)
+}

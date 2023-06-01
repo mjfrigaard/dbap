@@ -12,6 +12,7 @@
 #'
 #' @examples
 #' get_data_results("lubridate", incPackage = TRUE)
+#' get_data_results("dplyr", incPackage = TRUE)
 get_data_results <- function(pkg, allClass=FALSE,
 		incPackage=length(pkg) > 1,
 		maxTitle=NULL)
@@ -24,16 +25,14 @@ get_data_results <- function(pkg, allClass=FALSE,
 			else stop(paste("Package", pkg[i], "is not available"))
 	}
 	dsitems <- data(package = pkg)$results
-	wanted <- c('Package', 'Item','Title')
-	if (nrow(dsitems) < 2) {
-	ds <- data.frame(Package = dsitems[ , "Package"],
-	                 Item = dsitems[ , "Item"],
-                   Title = dsitems[ , "Title"],
-	                    stringsAsFactors = FALSE)
-	} else {
-	  ds <- as.data.frame(dsitems[,wanted],
-	                    stringsAsFactors = FALSE)
-	}
+	ds <- tibble::as_tibble(
+	        data.frame(
+	          Package = dsitems[ , "Package"],
+	          Item = dsitems[ , "Item"],
+            Title = dsitems[ , "Title"],
+	            stringsAsFactors = FALSE,
+              check.names = FALSE,
+              row.names = NULL))
 
   getData <- function(x, pkg) {
 	  # fix items with " (...)" in names, e.g., "BJsales.lead (BJsales)" in datasets
@@ -57,6 +56,7 @@ get_data_results <- function(pkg, allClass=FALSE,
 		cl <- class(data)
 		if (length(cl) > 1 && !allClass) cl[length(cl)] else cl
 	}
+	# browser() # start debug mode!
 	ds$dim <- unlist(lapply(seq_len(nrow(ds)), getDim ))
 	ds$class <- unlist(lapply(seq_len(nrow(ds)), getClass ))
 	if (!is.null(maxTitle)) ds$Title <- substr(ds$Title, 1, maxTitle)
@@ -65,19 +65,3 @@ get_data_results <- function(pkg, allClass=FALSE,
 	else
 		ds[c('Item','class','dim','Title')]
 }
-
-
-
-# dsitems <- data(package = "dplyr")$results
-# dsitems
-# dsitem <- data(package = "forcats")$results
-#
-# dim(dsitems)
-# dim(dsitem)
-# nrow(dsitems)
-# nrow(dsitem)
-#
-# dsitems[ , "Package"]
-# dsitem[ , "Package"]
-
-
