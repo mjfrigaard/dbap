@@ -177,7 +177,6 @@ get_pkg_datameta <- function(package, allClass = FALSE,
   }
   dsitems <- data(package = package)$results
   wanted <- c("Package", "Item", "Title")
-
   ds <- as.data.frame(dsitems[, wanted], stringsAsFactors = FALSE)
 
   getData <- function(x, pkg) {
