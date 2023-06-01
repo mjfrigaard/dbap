@@ -1,6 +1,6 @@
 #' Re-worked version of datasets() from (vcdExtra)
 #'
-#' @param package name of package
+#' @param pkg name of package
 #' @param allClass logical, include all classes of the item (`TRUE`) or just
 #' the last class (`FALSE`)
 #' @param incPackage logical, include package name in result?
@@ -8,21 +8,22 @@
 #'
 #' @return metadata table of data object
 #'
-#' @noRd
+#' @export get_data_results
 #'
-datasets <- function(package, allClass=FALSE,
-		incPackage=length(package) > 1,
+#' @examples
+#' get_data_results("lubridate", incPackage = TRUE)
+get_data_results <- function(pkg, allClass=FALSE,
+		incPackage=length(pkg) > 1,
 		maxTitle=NULL)
 {
 	# make sure requested packages are available and loaded
-	for (i in seq_along(package)) {
-		if (!isNamespaceLoaded(package[i]))
-			if (requireNamespace(package[i], quietly = TRUE))
-				cat(paste("Loading package:", package[i], "\n"))
-			else stop(paste("Package", package[i], "is not available"))
+	for (i in seq_along(pkg)) {
+		if (!isNamespaceLoaded(pkg[i]))
+			if (requireNamespace(pkg[i], quietly = TRUE))
+				cat(paste("Loading package:", pkg[i], "\n"))
+			else stop(paste("Package", pkg[i], "is not available"))
 	}
-  browser() # start debug mode!
-	dsitems <- data(package = package)$results
+	dsitems <- data(package = pkg)$results
 	wanted <- c('Package', 'Item','Title')
 	if (nrow(dsitems) < 2) {
 	ds <- data.frame(Package = dsitems[ , "Package"],
@@ -46,7 +47,7 @@ datasets <- function(package, allClass=FALSE,
 	    data(list = dataname, package = pkg, envir = e)
 	  }
 	  get(objname, envir = e)
-	}
+  }
 	getDim <- function(i) {
 	  data <- getData(ds$Item[i], ds$Package[i])
 		if (is.null(dim(data))) length(data) else paste(dim(data), collapse = 'x')
@@ -56,6 +57,7 @@ datasets <- function(package, allClass=FALSE,
 		cl <- class(data)
 		if (length(cl) > 1 && !allClass) cl[length(cl)] else cl
 	}
+	browser() # start debug mode!
 	ds$dim <- unlist(lapply(seq_len(nrow(ds)), getDim ))
 	ds$class <- unlist(lapply(seq_len(nrow(ds)), getClass ))
 	if (!is.null(maxTitle)) ds$Title <- substr(ds$Title, 1, maxTitle)
@@ -64,7 +66,7 @@ datasets <- function(package, allClass=FALSE,
 	else
 		ds[c('Item','class','dim','Title')]
 }
-datasets("lubridate", incPackage = TRUE)
+get_data_results("lubridate", incPackage = TRUE)
 
 
 # dsitems <- data(package = "dplyr")$results
