@@ -47,6 +47,7 @@ datasets <- function(package, allClass=FALSE,
 		cl <- class(data)
 		if (length(cl) > 1 && !allClass) cl[length(cl)] else cl
 	}
+	# browser() # start debug mode!
 	ds$dim <- unlist(lapply(seq_len(nrow(ds)), getDim ))
 	ds$class <- unlist(lapply(seq_len(nrow(ds)), getClass ))
 	if (!is.null(maxTitle)) ds$Title <- substr(ds$Title, 1, maxTitle)
@@ -55,3 +56,7 @@ datasets <- function(package, allClass=FALSE,
 	else
 		ds[c('Item','class','dim','Title')]
 }
+
+
+# datasets("dplyr", incPackage = TRUE)
+
