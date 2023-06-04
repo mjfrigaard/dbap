@@ -1,37 +1,3 @@
-#' Check if package is loaded, if not load it
-#'
-#' @param pkg name of package (a character vector)
-#'
-#' @return Package: `'name'` loaded or Loading package: `'name'`
-#' @export check_inst_pkg
-#'
-#' @description
-#' Check if `pkg` is installed. If not, package is installed with
-#' `install.packages(dependencies = TRUE)` and loaded with
-#' `library(pkg, character.only = TRUE)`
-#'
-#'
-#' @examples
-#' check_inst_pkg("plotly")
-check_inst_pkg <- function(pkg) {
-  package.check <- suppressWarnings(
-    suppressMessages(
-      suppressPackageStartupMessages(
-        lapply(X = pkg, FUN = function(x) {
-          if (!require(x, character.only = TRUE)) {
-            install.packages(x, dependencies = TRUE)
-          }
-        })
-      )
-    )
-  )
-  suppressWarnings(
-    suppressPackageStartupMessages(
-      library(pkg, character.only = TRUE)
-    )
-  )
-}
-
 #' Get all packages on search list
 #'
 #' @return All items from `search()` with a `package:` prefix
