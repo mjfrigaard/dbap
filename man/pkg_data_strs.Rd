@@ -36,8 +36,8 @@ Get dataset structure from package
 }
 \examples{
 require(forcats)
-require(dplyr)
 pkg_data_strs("forcats")
+require(dplyr)
 pkg_data_strs(c("dplyr", "forcats"))
 require(forcats)
 require(dplyr)

@@ -37,7 +37,7 @@ pkg_data_strs <- function(pkg) {
     .f = get_data, .progress = TRUE
   )
 
-  class_tbl <-   dplyr::mutate(ds,
+  cols_tbl <-   dplyr::mutate(ds,
     Class = purrr::map(.x = ds_list, .f = class) |>
             purrr::map(paste0, collapse = ", ") |> unlist(),
     Columns = purrr::map(.x = ds_list, .f = ncol) |>
@@ -56,7 +56,7 @@ pkg_data_strs <- function(pkg) {
                          .f = get_df_col_count, "lst") |> unlist(),
   )
 
-  pkg_tbls_dfs <- dplyr::filter(class_tbl,
+  pkg_tbls_dfs <- dplyr::filter(cols_tbl,
     stringr::str_detect(Class, "data.frame")
   )
 
