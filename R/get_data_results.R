@@ -16,7 +16,7 @@ get_data_results <- function(pkg) {
   # load packages
   check_inst_pkg(pkg = pkg, quiet = TRUE)
 
-  tibble::as_tibble(
+  results <- tibble::as_tibble(
     data.frame(
       Package = data(package = pkg)$results[, "Package"],
       Item = data(package = pkg)$results[, "Item"],
@@ -26,4 +26,28 @@ get_data_results <- function(pkg) {
       row.names = NULL
     )
   )
+
+  if (nrow(results) == 0) {
+
+  data_results <- tibble::as_tibble(
+    data.frame(
+		matrix(
+			nrow = 1, ncol = 11,
+			byrow = TRUE,
+			dimnames = list(NULL,
+			  c("Package", "Item", "Title",
+			    "Class", "Columns", "Rows",
+			    "Logical", "Numeric", "Character", "Factor", "List"))
+				),
+		row.names = NULL))
+
+    return(data_results)
+
+
+  } else {
+
+    results
+
+  }
+
 }

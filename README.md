@@ -6,8 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `dbap` is to demonstrate how to test a shiny application
-package using [`testthat`](https://testthat.r-lib.org/),
+The goal of `dbap` is to demonstrate how debugging functions within a
+shiny application package using
+[`testthat`](https://testthat.r-lib.org/),
 [`shiny::testServer()`](https://search.r-project.org/CRAN/refmans/shiny/html/testServer.html),
 and RStudio’s debugger.
 

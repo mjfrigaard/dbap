@@ -30,3 +30,10 @@ library(palmerpenguins)
 library(fs)
 library(shiny)
 ```
+
+There are two modules in `dbap`: `mod_pkg_data` and `mod_select_vars`. 
+
+## Package data (`mod_pkg_data`)
+
+## Variable select (`mod_select_vars`)
+

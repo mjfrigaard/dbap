@@ -14,7 +14,7 @@ appUI <- function() {
           ),
         shiny::mainPanel(
           shiny::h3(
-            shiny::code("CustomSkimApp")),
+            shiny::code("debugApp()")),
           mod_select_vars_ui("vars"),
           shiny::verbatimTextOutput("skim"),
           shiny::verbatimTextOutput("vals")

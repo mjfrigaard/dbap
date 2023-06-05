@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "get_ds_str",
+        "query": "skimApp",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 13,
+        "resultsCount": 7,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true

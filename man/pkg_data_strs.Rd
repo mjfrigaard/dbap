@@ -12,20 +12,7 @@ pkg_data_strs(pkg)
 \item{pkg}{name of package}
 }
 \value{
-\code{tibble} with the following columns:
-
-\describe{
-\item{Package}{name of package}
-\item{Dataset}{name of dataset}
-\item{Class}{class of dataset}
-\item{Columns}{total columns}
-\item{Rows}{total rows}
-\item{Logical}{total logical columns}
-\item{Numeric}{total numeric columns}
-\item{Character}{total character columns}
-\item{Factor}{total factor columns}
-\item{List}{total list columns}
-}
+dataset structure \code{tibble}
 
 data object
 }
@@ -34,6 +21,22 @@ Get dataset structures from R package
 
 Get dataset structure from package
 }
+\section{The returned object has the following columns}{
+
+\itemize{
+\item \code{Package}: name of package
+\item \code{Dataset}: name of dataset
+\item \code{Class}: class of dataset
+\item \code{Columns}: total columns
+\item \code{Rows}: total rows
+\item \code{Logical}: total logical columns
+\item \code{Numeric}: total numeric columns
+\item \code{Character}: total character columns
+\item \code{Factor}: total factor columns
+\item \code{List}: total list columns
+}
+}
+
 \examples{
 require(forcats)
 pkg_data_strs("forcats")

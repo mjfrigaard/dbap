@@ -2,20 +2,29 @@
 #'
 #' @param pkg name of package(s)
 #'
-#' @return `tibble` with the following columns:
+#' @return dataset structure `tibble`
 #'
-#' \describe{
-#'   \item{Package}{name of package}
-#'   \item{Dataset}{name of dataset}
-#'   \item{Class}{class of dataset}
-#'   \item{Columns}{total columns}
-#'   \item{Rows}{total rows}
-#'   \item{Logical}{total logical columns}
-#'   \item{Numeric}{total numeric columns}
-#'   \item{Character}{total character columns}
-#'   \item{Factor}{total factor columns}
-#'   \item{List}{total list columns}
-#' }
+#' @section The returned object has the following columns:
+#'
+#' * `Package`: name of package
+#'
+#' * `Dataset`: name of dataset
+#'
+#' * `Class`: class of dataset
+#'
+#' * `Columns`: total columns
+#'
+#' * `Rows`: total rows
+#'
+#' * `Logical`: total logical columns
+#'
+#' * `Numeric`: total numeric columns
+#'
+#' * `Character`: total character columns
+#'
+#' * `Factor`: total factor columns
+#'
+#' * `List`: total list columns
 #'
 #' @export pkg_data_strs
 #'
@@ -30,35 +39,79 @@
 #' pkg_data_strs(c("dplyr", "forcats"))
 pkg_data_strs <- function(pkg) {
 
-  ds <- get_data_results(pkg = pkg)
+  data_results <- get_data_results(pkg = pkg)
 
-  ds_list <- purrr::map2(
-    .x = ds[["Item"]], .y = ds[["Package"]],
-    .f = get_data, .progress = TRUE
-  )
+  if (!is.logical(data_results[["Item"]])) {
+    # data_results contains data objects
+    ds_list <- purrr::map2(
+      .x = data_results[["Item"]], .y = data_results[["Package"]],
+      .f = get_data, .progress = TRUE
+    )
 
-  cols_tbl <-   dplyr::mutate(ds,
-    Class = purrr::map(.x = ds_list, .f = class) |>
-            purrr::map(paste0, collapse = ", ") |> unlist(),
-    Columns = purrr::map(.x = ds_list, .f = ncol) |>
-              purrr::map(paste0, " columns") |> unlist(),
-    Rows = purrr::map(.x = ds_list, .f = nrow) |>
-           purrr::map(paste0, " rows") |> unlist(),
-    Logical = purrr::map(.x = ds_list,
-                         .f = get_df_col_count, "log") |> unlist(),
-    Numeric = purrr::map(.x = ds_list,
-                         .f = get_df_col_count, "num") |> unlist(),
-    Character = purrr::map(.x = ds_list,
-                         .f = get_df_col_count, "chr") |> unlist(),
-    Factor = purrr::map(.x = ds_list,
-                         .f = get_df_col_count, "fct") |> unlist(),
-    List = purrr::map(.x = ds_list,
-                         .f = get_df_col_count, "lst") |> unlist(),
-  )
+    class_tbl <- dplyr::mutate(data_results,
+      Class = purrr::map(.x = ds_list, .f = class) |>
+        purrr::map(paste0, collapse = ", ") |> unlist()
+    )
 
-  pkg_tbls_dfs <- dplyr::filter(cols_tbl,
-    stringr::str_detect(Class, "data.frame")
-  )
+    df_tbl <- dplyr::filter(
+      class_tbl,
+      stringr::str_detect(Class, "data.frame")
+    )
 
-  return(pkg_tbls_dfs)
+    if (nrow(df_tbl) == 0) {
+      # df_tbl does not contain 'data.frame' classes
+      data_results <- tibble::as_tibble(
+        data.frame(
+          matrix(
+            nrow = 1, ncol = 11,
+            byrow = TRUE,
+            dimnames = list(
+              NULL,
+              c(
+                "Package", "Item", "Title",
+                "Class", "Columns", "Rows",
+                "Logical", "Numeric", "Character",
+                "Factor", "List"
+              )
+            )
+          ),
+          row.names = NULL
+        )
+      )
+
+      return(data_results)
+
+    } else {
+
+      # df_tbl contains 'data.frame' classes
+      dplyr::mutate(df_tbl,
+        Columns = purrr::map(.x = ds_list, .f = ncol) |>
+          purrr::map(paste0, " columns") |> unlist(),
+        Rows = purrr::map(.x = ds_list, .f = nrow) |>
+          purrr::map(paste0, " rows") |> unlist(),
+        Logical = purrr::map(
+          .x = ds_list,
+          .f = get_df_col_count, "log") |> unlist(),
+        Numeric = purrr::map(
+          .x = ds_list,
+          .f = get_df_col_count, "num") |> unlist(),
+        Character = purrr::map(
+          .x = ds_list,
+          .f = get_df_col_count, "chr") |> unlist(),
+        Factor = purrr::map(
+          .x = ds_list,
+          .f = get_df_col_count, "fct") |> unlist(),
+        List = purrr::map(
+          .x = ds_list,
+          .f = get_df_col_count, "lst") |> unlist())
+
+    }
+
+  } else {
+
+    # data_results does not contains data objects
+    return(data_results)
+
+  }
+
 }
