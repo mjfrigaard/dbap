@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "pkgs_nms_with_data_frames",
+        "query": "dbApp",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 15,
+        "resultsCount": 9,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true

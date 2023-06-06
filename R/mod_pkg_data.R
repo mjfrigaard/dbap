@@ -50,8 +50,8 @@ mod_pkg_data_server <- function(id) {
 
     shiny::reactive({
           shiny::req(input$data, input$pkg)
-          get(x = input$data,
-              pos = paste0("package:", input$pkg))
+          list(ds = input$data,
+               pkg = input$pkg)
           }) |>
             shiny::bindCache(c(input$pkg, input$data)) |>
             shiny::bindEvent(input$data,

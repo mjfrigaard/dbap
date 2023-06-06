@@ -18,13 +18,14 @@ mod_select_vars_ui <- function(id) {
                 'Factor' = "is.factor",
                 'Logical' = "is.logical",
                 'List' = "is.list"),
-    selected = c('Character' = "is.character")),
+    selected = c('Numeric' = "is.numeric")),
   shiny::selectizeInput(
     ns("vars"),
     label = "Select variables",
     choices = NULL,
     multiple = TRUE,
-    width = '90%')
+    width = '90%'),
+    shiny::verbatimTextOutput(ns("pkg_data"))
     )
 }
 
@@ -35,36 +36,45 @@ mod_select_vars_ui <- function(id) {
 #' @return shiny server module
 #' @export mod_select_vars_server
 #'
-#'
+#' @importFrom tibble as_tibble
 #' @importFrom shiny NS moduleServer reactive req
 #' @importFrom shiny bindCache bindEvent observe
 mod_select_vars_server <- function(id, pkg_data) {
 
   shiny::moduleServer(id, function(input, output, session) {
 
-    # output$ids <- shiny::renderPrint({
-    #   # all_ids <- reactiveValuesToList(input, TRUE)
-    #   # lobstr::tree(all_ids)
-    #   print(str(pkg_data()), width = 50L, max.levels = NULL)
+    # output$pkg_data <- shiny::renderPrint({
+    #   print(str(pkg_ds()),
+    #     width = 50L, max.levels = NULL)
     # })
+
+    pkg_ds <- shiny::reactive({
+        pkg_data_object(ds = pkg_data()$ds,
+                        pkg = pkg_data()$pkg)
+        }) |>
+          shiny::bindEvent(
+            c(pkg_data()$ds, pkg_data()$pkg),
+            ignoreNULL = TRUE)
 
       shiny::observe({
         filtered <- pull_type_cols(
-                              data = pkg_data(),
+                              data = pkg_ds(),
                               filter =  input$fun)
          shiny::updateSelectizeInput(session,
             inputId = "vars",
             choices = filtered,
            selected = filtered)
          }) |>
-          shiny::bindEvent(c(pkg_data(), input$fun),
-            ignoreNULL = TRUE)
+          shiny::bindEvent(c(pkg_ds(), input$fun),
+                            ignoreNULL = TRUE)
 
         shiny::reactive({
            shiny::req(input$vars, input$fun)
-              pkg_data()[input$vars]
+              pkg_ds()[input$vars]
             }) |>
           shiny::bindEvent(input$vars, input$fun)
+
+
 
     })
 
