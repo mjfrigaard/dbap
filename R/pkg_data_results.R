@@ -37,7 +37,9 @@ pkg_data_results <- function(pkg) {
 			dimnames = list(NULL,
 			  c("Package", "Item", "Title",
 			    "Class", "Columns", "Rows",
-			    "Logical", "Numeric", "Character", "Factor", "List"))
+			    "Logical", "Numeric",
+			    "Character", "Factor",
+			    "List"))
 				),
 		row.names = NULL))
 

@@ -22,24 +22,25 @@ knitr::opts_chunk$set(
 library(dbap)
 ```
 
-There are multiple helper functions for dealing with packages and data in `dbap`. 
+There are multiple helper functions for dealing with packages and data in `dbap`.
 
-# Packages 
+# Packages
 
 ## `search_list_pkg_nms()`
+
+`search_list_pkg_nms()` returns the names of the packages on the search list:
 
 ```{r search_list_pkg_nms}
 search_list_pkg_nms()
 ```
 
-
-Check to see if a package (`fs`) is installed on the `search()` list:
+I'll use `grep()` to check to see if a package (`fs`) is installed on the `search()` list:
 
 ```{r}
 grep(pattern = "package:fs", x = search(), value = TRUE)
 ```
 
-Check for package in loaded namespaces: 
+I can use `loadedNamespaces()` to check for a package in loaded namespaces:
 
 ```{r}
 "fs" %in% loadedNamespaces()
@@ -47,29 +48,28 @@ Check for package in loaded namespaces:
 
 ## `check_pkg_ns()`
 
-`check_pkg_ns()` will add the package namespace to `loadedNamespaces()`, but not add it to the search list: 
+`check_pkg_ns()` adds a package namespace to `loadedNamespaces()`, but doesn't add it to the search list:
 
 ```{r}
 # remove package
 unloadNamespace("fs")
-# check search list
-grep(pattern = "package:fs", x = search(), value = TRUE)
 # check loadedNamespaces
 "fs" %in% loadedNamespaces()
+# check search list
+grep(pattern = "package:fs", x = search(), value = TRUE)
 ```
 
-Add package namespace: 
+Add package namespace:
 
 ```{r}
 check_pkg_ns("fs")
 ```
 
-Now check if the package namespace is loaded and on the `search()` list: 
+Now check if the package namespace is loaded and on the `search()` list:
 
 ```{r}
 "fs" %in% loadedNamespaces()
 ```
-
 
 ```{r}
 grep(pattern = "package:fs", x = search(), value = TRUE)
@@ -86,12 +86,11 @@ unloadNamespace("fs")
 "fs" %in% loadedNamespaces()
 ```
 
-
 ```{r}
 check_pkg_inst("fs")
 ```
 
-This package's namespace is loaded, and it's not on the `search()` list: 
+This package's namespace is loaded, and it's not on the `search()` list:
 
 ```{r}
 grep(pattern = "package:fs", x = search(), value = TRUE)
@@ -110,7 +109,6 @@ check_pkg_ns(c("dplyr", "tidyr", "forcats", "lubridate"))
 pkg_nms_with_data_frames()
 ```
 
-
 ## `pkg_data_frame_nms()`
 
 `pkg_data_frame_nms()` returns the names of the `data.frame` data objects:
@@ -119,7 +117,7 @@ pkg_nms_with_data_frames()
 pkg_data_frame_nms(pkg = "lubridate")
 ```
 
-If there are no `data.frame`s, `NULL` is returned: 
+If there are no `data.frame`s, `NULL` is returned:
 
 ```{r pkg_data_frame_nms-null, message=FALSE, warning=FALSE}
 pkg_data_frame_nms(pkg = "fs")
@@ -127,17 +125,38 @@ pkg_data_frame_nms(pkg = "fs")
 
 ## `pkg_data_object()`
 
+`pkg_data_object()` is a wrapper around `get()` and returns the data object from a package:
+
 ```{r pkg_data_object}
 str(pkg_data_object(ds = "storms", pkg = "dplyr"))
 ```
 
+```{r}
+str(pkg_data_object(ds = "Theoph", pkg = "datasets"))
+```
+
 ## `pkg_data_results()`
+
+`pkg_data_results()` returns the `results` from `data(package = pkg)`
 
 ```{r}
 pkg_data_results(pkg = c("forcats", "lubridate"))
 ```
 
+If `pkg` doesn't have any data objects, it returns an empty tibble.
+
+```{r}
+pkg_data_results(pkg = "fs")
+```
+
 ## `pkg_data_str()`
+
+`pkg_data_str()` returns the 'package data structure' tibble, which contains the `Package`, `Item`, Title, Class, total Columns and Rows, and column counts by type (`Logical`, `Numeric`, `Character`, `Factor`, `List`)
+
+```{r}
+pkg_data_str(pkg = "dplyr")
+```
+
 
 ```{r}
 pkg_data_str(pkg = c("forcats", "lubridate"))
