@@ -10,9 +10,9 @@
 #' @importFrom ggplot2 ggplot aes
 #'
 #' @examples
-#' require(palmerpenguins)
-#' penguins <- palmerpenguins::penguins
-#' gg_base(df = penguins, x_var = "bill_length_mm", y_var = "body_mass_g")
+#' require(dplyr)
+#' starwars <- dplyr::starwars
+#' gg_base(df = starwars, x_var = "height", y_var = "mass")
 gg_base <- function(df, x_var, y_var) {
   ggplot2::ggplot(
     data = df,
@@ -20,7 +20,7 @@ gg_base <- function(df, x_var, y_var) {
   )
 }
 
-#' Make x,y plot title
+#' Make x, y plot title
 #'
 #' @param x x variable
 #' @param y y variable
@@ -35,8 +35,8 @@ gg_base <- function(df, x_var, y_var) {
 #'
 #' @examples
 #' make_x_y_title(
-#'   x = "imdb_rating",
-#'   y = "audience_score"
+#'   x = "height",
+#'   y = "mass"
 #' )
 make_x_y_title <- function(x, y) {
   x_chr <- stringr::str_replace_all(
@@ -64,12 +64,12 @@ make_x_y_title <- function(x, y) {
 #' @importFrom snakecase to_title_case
 #'
 #' @examples
-#' require(palmerpenguins)
-#' penguins <- palmerpenguins::penguins
+#' require(dplyr)
+#' starwars <- dplyr::starwars
 #' gg_scatter(
-#'   df = penguins,
-#'   x_var = "bill_length_mm",
-#'   y_var = "body_mass_g",
+#'   df = starwars,
+#'   x_var = "height",
+#'   y_var = "mass",
 #'   alpha = 1 / 3,
 #'   color = "#000000",
 #'   size = 2
@@ -108,9 +108,9 @@ gg_scatter <- function(df, x_var, y_var, ...) {
 #'
 #' @examples
 #' make_x_y_color_title(
-#'   x = "imdb_rating",
-#'   y = "audience_score",
-#'   color = "mpaa_rating"
+#'   x = "height",
+#'   y = "mass",
+#'   color = "hair_color"
 #' )
 make_x_y_color_title <- function(x, y, color) {
   x_chr <- stringr::str_replace_all(
@@ -142,13 +142,13 @@ make_x_y_color_title <- function(x, y, color) {
 #' @importFrom snakecase to_title_case
 #'
 #' @examples
-#' require(palmerpenguins)
-#' penguins <- palmerpenguins::penguins
+#' require(dplyr)
+#' starwars <- dplyr::starwars
 #' gg_color_scatter(
-#'   df = penguins,
-#'   x_var = "bill_length_mm",
-#'   y_var = "body_mass_g",
-#'   col_var = "species",
+#'   df = starwars,
+#'   x_var = "height",
+#'   y_var = "mass",
+#'   col_var = "hair_color",
 #'   alpha = 1 / 3,
 #'   size = 2
 #' )
@@ -191,9 +191,9 @@ gg_color_scatter <- function(df, x_var, y_var, col_var, ...) {
 #'
 #' @examples
 #' make_x_y_color_title(
-#'   x = "imdb_rating",
-#'   y = "audience_score",
-#'   color = "mpaa_rating"
+#'   x = "height",
+#'   y = "mass",
+#'   color = "hair_color"
 #' )
 make_x_y_col_facet_title <- function(x, y, color, facets) {
   x_chr <- stringr::str_replace_all(
@@ -227,50 +227,50 @@ make_x_y_col_facet_title <- function(x, y, color, facets) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' require(palmerpenguins)
+#' require(dplyr)
 #' gg_color_scatter_facet(
-#'   df = palmerpenguins::penguins,
-#'   x_var = "bill_length_mm",
-#'   y_var = "flipper_length_mm",
-#'   col_var = "island",
-#'   facet_var = "species",
+#'   df = dplyr::starwars,
+#'   x_var = "height",
+#'   y_var = "mass",
+#'   col_var = "hair_color",
+#'   facet_var = "gender",
 #'   alpha = 1 / 3,
 #'   size = 2
 #' )
 #' # compare with
 #' ggplot2::ggplot(
-#'   data = palmerpenguins::penguins,
-#'   mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+#'   data = dplyr::starwars,
+#'   mapping = ggplot2::aes(x = height, y = mass)
 #' ) +
-#'   ggplot2::geom_point(aes(color = island, group = island),
+#'   ggplot2::geom_point(aes(color = hair_color, group = gender),
 #'     size = 2, alpha = 1 / 3
 #'   ) +
-#'   ggplot2::facet_wrap(. ~ species) +
+#'   ggplot2::facet_wrap(. ~ gender) +
 #'   ggplot2::theme_minimal() +
 #'   ggplot2::theme(legend.position = "bottom")
 #' gg_color_scatter_facet(
-#'   df = palmerpenguins::penguins,
-#'   x_var = "bill_length_mm",
-#'   y_var = "flipper_length_mm",
-#'   col_var = "island",
+#'   df = dplyr::starwars,
+#'   x_var = "height",
+#'   y_var = "mass",
+#'   col_var = "hair_color",
 #'   facet_var = NULL,
 #'   alpha = 1 / 3,
 #'   size = 2
 #' )
 #' # compare with
 #' ggplot2::ggplot(
-#'   data = palmerpenguins::penguins,
-#'   mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+#'   data = dplyr::starwars,
+#'   mapping = ggplot2::aes(x = height, y = mass)
 #' ) +
-#'   ggplot2::geom_point(aes(color = island, group = island),
+#'   ggplot2::geom_point(aes(color = hair_color, group = gender),
 #'     size = 2, alpha = 1 / 3
 #'   ) +
 #'   ggplot2::theme_minimal() +
 #'   ggplot2::theme(legend.position = "bottom")
 #' gg_color_scatter_facet(
-#'   df = palmerpenguins::penguins,
-#'   x_var = "bill_length_mm",
-#'   y_var = "flipper_length_mm",
+#'   df = dplyr::starwars,
+#'   x_var = "height",
+#'   y_var = "mass",
 #'   col_var = NULL,
 #'   facet_var = NULL,
 #'   alpha = 1 / 3,
@@ -278,8 +278,8 @@ make_x_y_col_facet_title <- function(x, y, color, facets) {
 #' )
 #' # compare with
 #' ggplot(
-#'   data = palmerpenguins::penguins,
-#'   mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+#'   data = dplyr::starwars,
+#'   mapping = ggplot2::aes(x = height, y = mass)
 #' ) +
 #'   ggplot2::geom_point(size = 2, alpha = 1 / 3) +
 #'   ggplot2::theme_minimal() +

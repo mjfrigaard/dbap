@@ -26,50 +26,50 @@ A \code{ggplot2} plot object
 Colored point plot (scatter-plot) with facets
 }
 \examples{
-require(palmerpenguins)
+require(dplyr)
 gg_color_scatter_facet(
-  df = palmerpenguins::penguins,
-  x_var = "bill_length_mm",
-  y_var = "flipper_length_mm",
-  col_var = "island",
-  facet_var = "species",
+  df = dplyr::starwars,
+  x_var = "height",
+  y_var = "mass",
+  col_var = "hair_color",
+  facet_var = "gender",
   alpha = 1 / 3,
   size = 2
 )
 # compare with
 ggplot2::ggplot(
-  data = palmerpenguins::penguins,
-  mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+  data = dplyr::starwars,
+  mapping = ggplot2::aes(x = height, y = mass)
 ) +
-  ggplot2::geom_point(aes(color = island, group = island),
+  ggplot2::geom_point(aes(color = hair_color, group = gender),
     size = 2, alpha = 1 / 3
   ) +
-  ggplot2::facet_wrap(. ~ species) +
+  ggplot2::facet_wrap(. ~ gender) +
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "bottom")
 gg_color_scatter_facet(
-  df = palmerpenguins::penguins,
-  x_var = "bill_length_mm",
-  y_var = "flipper_length_mm",
-  col_var = "island",
+  df = dplyr::starwars,
+  x_var = "height",
+  y_var = "mass",
+  col_var = "hair_color",
   facet_var = NULL,
   alpha = 1 / 3,
   size = 2
 )
 # compare with
 ggplot2::ggplot(
-  data = palmerpenguins::penguins,
-  mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+  data = dplyr::starwars,
+  mapping = ggplot2::aes(x = height, y = mass)
 ) +
-  ggplot2::geom_point(aes(color = island, group = island),
+  ggplot2::geom_point(aes(color = hair_color, group = gender),
     size = 2, alpha = 1 / 3
   ) +
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "bottom")
 gg_color_scatter_facet(
-  df = palmerpenguins::penguins,
-  x_var = "bill_length_mm",
-  y_var = "flipper_length_mm",
+  df = dplyr::starwars,
+  x_var = "height",
+  y_var = "mass",
   col_var = NULL,
   facet_var = NULL,
   alpha = 1 / 3,
@@ -77,8 +77,8 @@ gg_color_scatter_facet(
 )
 # compare with
 ggplot(
-  data = palmerpenguins::penguins,
-  mapping = ggplot2::aes(x = bill_length_mm, y = flipper_length_mm)
+  data = dplyr::starwars,
+  mapping = ggplot2::aes(x = height, y = mass)
 ) +
   ggplot2::geom_point(size = 2, alpha = 1 / 3) +
   ggplot2::theme_minimal() +

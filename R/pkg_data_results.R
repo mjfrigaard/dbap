@@ -4,17 +4,17 @@
 #'
 #' @return metadata table of data object
 #'
-#' @export get_data_results
+#' @export pkg_data_results
 #'
 #'
 #' @importFrom tibble as_tibble
 #'
 #' @examples
-#' get_data_results("lubridate")
-#' get_data_results("dplyr")
-get_data_results <- function(pkg) {
+#' pkg_data_results("lubridate")
+#' pkg_data_results("dplyr")
+pkg_data_results <- function(pkg) {
   # load packages
-  check_inst_pkg(pkg = pkg, quiet = TRUE)
+  check_pkg_ns(pkg = pkg, quiet = TRUE)
 
   results <- tibble::as_tibble(
     data.frame(

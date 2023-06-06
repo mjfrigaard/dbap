@@ -26,7 +26,7 @@
 #'
 #' * `List`: total list columns
 #'
-#' @export pkg_data_strs
+#' @export pkg_data_str
 #'
 #' @importFrom purrr map2 map
 #' @importFrom stringr str_detect
@@ -34,18 +34,19 @@
 #'
 #' @examples
 #' require(forcats)
-#' pkg_data_strs("forcats")
+#' pkg_data_str("forcats")
 #' require(dplyr)
-#' pkg_data_strs(c("dplyr", "forcats"))
-pkg_data_strs <- function(pkg) {
+#' pkg_data_str(c("dplyr", "forcats"))
+pkg_data_str <- function(pkg) {
 
-  data_results <- get_data_results(pkg = pkg)
+  data_results <- pkg_data_results(pkg = pkg)
 
   if (!is.logical(data_results[["Item"]])) {
     # data_results contains data objects
     ds_list <- purrr::map2(
-      .x = data_results[["Item"]], .y = data_results[["Package"]],
-      .f = get_data, .progress = TRUE
+      .x = data_results[["Item"]],
+      .y = data_results[["Package"]],
+      .f = pkg_data_object, .progress = TRUE
     )
 
     class_tbl <- dplyr::mutate(data_results,
@@ -91,19 +92,19 @@ pkg_data_strs <- function(pkg) {
           purrr::map(paste0, " rows") |> unlist(),
         Logical = purrr::map(
           .x = ds_list,
-          .f = get_df_col_count, "log") |> unlist(),
+          .f = col_type_count, "log") |> unlist(),
         Numeric = purrr::map(
           .x = ds_list,
-          .f = get_df_col_count, "num") |> unlist(),
+          .f = col_type_count, "num") |> unlist(),
         Character = purrr::map(
           .x = ds_list,
-          .f = get_df_col_count, "chr") |> unlist(),
+          .f = col_type_count, "chr") |> unlist(),
         Factor = purrr::map(
           .x = ds_list,
-          .f = get_df_col_count, "fct") |> unlist(),
+          .f = col_type_count, "fct") |> unlist(),
         List = purrr::map(
           .x = ds_list,
-          .f = get_df_col_count, "lst") |> unlist())
+          .f = col_type_count, "lst") |> unlist())
 
     }
 

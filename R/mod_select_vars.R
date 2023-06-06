@@ -13,17 +13,18 @@ mod_select_vars_ui <- function(id) {
   shiny::selectInput(
     ns("fun"),
     label = "Filter by",
-    choices = c("is.numeric",
-                "is.character",
-                "is.factor",
-                "is.logical",
-                "is.list"),
-    selected = "is.numeric"),
+    choices = c('Numeric' = "is.numeric",
+                'Character' = "is.character",
+                'Factor' = "is.factor",
+                'Logical' = "is.logical",
+                'List' = "is.list"),
+    selected = c('Character' = "is.character")),
   shiny::selectizeInput(
     ns("vars"),
     label = "Select variables",
     choices = NULL,
-    multiple = TRUE)
+    multiple = TRUE,
+    width = '90%')
     )
 }
 
@@ -40,6 +41,12 @@ mod_select_vars_ui <- function(id) {
 mod_select_vars_server <- function(id, pkg_data) {
 
   shiny::moduleServer(id, function(input, output, session) {
+
+    # output$ids <- shiny::renderPrint({
+    #   # all_ids <- reactiveValuesToList(input, TRUE)
+    #   # lobstr::tree(all_ids)
+    #   print(str(pkg_data()), width = 50L, max.levels = NULL)
+    # })
 
       shiny::observe({
         filtered <- pull_type_cols(

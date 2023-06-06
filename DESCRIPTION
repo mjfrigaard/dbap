@@ -23,12 +23,9 @@ Imports:
     dplyr,
     ggplot2,
     janitor,
-    NHANES,
-    palmerpenguins,
     shiny,
     stringr,
     testthat,
     vdiffr,
     zeallot,
-    Lahman,
     rlang

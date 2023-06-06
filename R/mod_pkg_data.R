@@ -7,9 +7,11 @@
 #'
 #' @importFrom shiny NS tagList code selectInput
 mod_pkg_data_ui <- function(id) {
-  require(palmerpenguins)
-  require(dplyr)
-  df_pkgs <- get_pkgs_with_dfs()
+
+  pkgs <- c("lubridate", "forcats", "tidyr", "dplyr")
+  requireNamespace(pkgs)
+
+  df_pkgs <- pkg_nms_with_data_frames()
   ns <- shiny::NS(id)
   shiny::tagList(
   shiny::selectInput(ns("pkg"),
@@ -28,20 +30,23 @@ mod_pkg_data_ui <- function(id) {
 #' @return shiny module server function
 #' @export mod_pkg_data_server
 #'
-#' @importFrom shiny NS moduleServer reactive req bindEvent
+#' @importFrom lobstr tree
+#' @importFrom shiny NS moduleServer reactive bindEvent
 #' @importFrom shiny updateSelectInput bindCache
+#' @importFrom shiny req renderPrint
+#' @importFrom renv install
 mod_pkg_data_server <- function(id) {
 
   shiny::moduleServer(id, function(input, output, session) {
 
     shiny::observe({
-        pkg_data_nms <- get_pkg_df_names(pkg = input$pkg)
+          shiny::req(input$pkg)
+        pkg_data_nms <- pkg_data_frame_nms(pkg = input$pkg)
          shiny::updateSelectInput(session,
             inputId = "data",
             choices = pkg_data_nms)
          }) |>
-       shiny::bindEvent(input$pkg,
-         ignoreNULL = TRUE)
+       shiny::bindEvent(input$pkg)
 
     shiny::reactive({
           shiny::req(input$data, input$pkg)

@@ -20,7 +20,7 @@ plot object
 Base plot (ggplot2)
 }
 \examples{
-require(palmerpenguins)
-penguins <- palmerpenguins::penguins
-gg_base(df = penguins, x_var = "bill_length_mm", y_var = "body_mass_g")
+require(dplyr)
+starwars <- dplyr::starwars
+gg_base(df = starwars, x_var = "height", y_var = "mass")
 }

@@ -1,0 +1,144 @@
+---
+title: "Packages and data.frames"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+vignette: >
+  %\VignetteIndexEntry{Packages and data.frames}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = TRUE
+)
+```
+
+```{r pkgs}
+library(dbap)
+```
+
+There are multiple helper functions for dealing with packages and data in `dbap`. 
+
+# Packages 
+
+## `search_list_pkg_nms()`
+
+```{r search_list_pkg_nms}
+search_list_pkg_nms()
+```
+
+
+Check to see if a package (`fs`) is installed on the `search()` list:
+
+```{r}
+grep(pattern = "package:fs", x = search(), value = TRUE)
+```
+
+Check for package in loaded namespaces: 
+
+```{r}
+"fs" %in% loadedNamespaces()
+```
+
+## `check_pkg_ns()`
+
+`check_pkg_ns()` will add the package namespace to `loadedNamespaces()`, but not add it to the search list: 
+
+```{r}
+# remove package
+unloadNamespace("fs")
+# check search list
+grep(pattern = "package:fs", x = search(), value = TRUE)
+# check loadedNamespaces
+"fs" %in% loadedNamespaces()
+```
+
+Add package namespace: 
+
+```{r}
+check_pkg_ns("fs")
+```
+
+Now check if the package namespace is loaded and on the `search()` list: 
+
+```{r}
+"fs" %in% loadedNamespaces()
+```
+
+
+```{r}
+grep(pattern = "package:fs", x = search(), value = TRUE)
+```
+
+## `check_pkg_inst()`
+
+`check_pkg_inst()` will install and load the package namespace:
+
+```{r}
+# remove from loaded namespaces
+unloadNamespace("fs")
+# confirm
+"fs" %in% loadedNamespaces()
+```
+
+
+```{r}
+check_pkg_inst("fs")
+```
+
+This package's namespace is loaded, and it's not on the `search()` list: 
+
+```{r}
+grep(pattern = "package:fs", x = search(), value = TRUE)
+"fs" %in% loadedNamespaces()
+```
+
+# Package `data.frame`s
+
+These functions deal with packages containing `data.frame`s.
+
+## `get_pkgs_with_dataframes()`
+
+```{r pkg_nms_with_data_frames, message=FALSE, warning=FALSE}
+check_pkg_inst(c("dplyr", "tidyr", "forcats", "lubridate"))
+check_pkg_ns(c("dplyr", "tidyr", "forcats", "lubridate"))
+pkg_nms_with_data_frames()
+```
+
+
+## `pkg_data_frame_nms()`
+
+`pkg_data_frame_nms()` returns the names of the `data.frame` data objects:
+
+```{r pkg_data_frame_nms, message=FALSE, warning=FALSE}
+pkg_data_frame_nms(pkg = "lubridate")
+```
+
+If there are no `data.frame`s, `NULL` is returned: 
+
+```{r pkg_data_frame_nms-null, message=FALSE, warning=FALSE}
+pkg_data_frame_nms(pkg = "fs")
+```
+
+## `pkg_data_object()`
+
+```{r pkg_data_object}
+str(pkg_data_object(ds = "storms", pkg = "dplyr"))
+```
+
+## `pkg_data_results()`
+
+```{r}
+pkg_data_results(pkg = c("forcats", "lubridate"))
+```
+
+## `pkg_data_str()`
+
+```{r}
+pkg_data_str(pkg = c("forcats", "lubridate"))
+```

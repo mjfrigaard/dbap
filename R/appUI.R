@@ -14,10 +14,10 @@ appUI <- function() {
           ),
         shiny::mainPanel(
           shiny::h3(
-            shiny::code("debugApp()")),
+            shiny::code("dbApp()")),
           mod_select_vars_ui("vars"),
           shiny::verbatimTextOutput("skim"),
-          shiny::verbatimTextOutput("vals")
+          shiny::verbatimTextOutput("ids")
         )
       )
     )

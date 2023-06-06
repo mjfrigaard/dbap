@@ -1,10 +1,10 @@
-#' Check if package is loaded, if not load it
+#' Check if package namespace is loaded, if not load it
 #'
 #' @param pkg name of package (a character vector)
 #' @param quiet logical, print messages
 #'
 #' @return Package: `'name'` loaded or Loading package: `'name'`
-#' @export check_inst_pkg
+#' @export check_pkg_ns
 #'
 #' @description
 #' Check if `pkg` is installed with `isNamespaceLoaded()`. If not, package is
@@ -16,18 +16,18 @@
 #' unloadNamespace("fs")
 #' unloadNamespace("box")
 #' # with single pkg
-#' check_inst_pkg("fs")
+#' check_pkg_ns("fs")
 #' # remove again
 #' unloadNamespace("fs")
 #' # with multiple pkgs
 #' pkgs <- c("fs", "box")
-#' check_inst_pkg(pkgs)
-check_inst_pkg <- function(pkg, quiet = FALSE) {
+#' check_pkg_ns(pkgs)
+check_pkg_ns <- function(pkg, quiet = FALSE) {
   if (isFALSE(quiet)) {
     # with messages
     if (!isNamespaceLoaded(pkg)) {
       if (requireNamespace(pkg, quietly = FALSE)) {
-        cat(paste0("Loading package: ", pkg, "\n"))
+        cat(paste0(pkg, " namespace loaded\n"))
       } else {
         stop(paste0(pkg, " not available"))
       }

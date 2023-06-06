@@ -22,12 +22,12 @@ A \code{ggplot2} plot object
 Point plot (scatter-plot)
 }
 \examples{
-require(palmerpenguins)
-penguins <- palmerpenguins::penguins
+require(dplyr)
+starwars <- dplyr::starwars
 gg_scatter(
-  df = penguins,
-  x_var = "bill_length_mm",
-  y_var = "body_mass_g",
+  df = starwars,
+  x_var = "height",
+  y_var = "mass",
   alpha = 1 / 3,
   color = "#000000",
   size = 2

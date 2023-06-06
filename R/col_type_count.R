@@ -5,11 +5,11 @@
 #' "lst".
 #'
 #' @return count of columns by type
-#' @export get_df_col_count
+#' @export col_type_count
 #'
 #' @examples
-#' get_df_col_count(mtcars, "num")
-get_df_col_count <- function(df, type) {
+#' col_type_count(mtcars, "num")
+col_type_count <- function(df, type) {
   switch(EXPR = type,
     chr = ncol(dplyr::select(df, dplyr::where(is.character))),
     num = ncol(dplyr::select(df, dplyr::where(is.numeric))),

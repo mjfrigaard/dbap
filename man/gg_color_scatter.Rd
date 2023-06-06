@@ -24,13 +24,13 @@ A \code{ggplot2} plot object
 Colored point plot (scatter-plot)
 }
 \examples{
-require(palmerpenguins)
-penguins <- palmerpenguins::penguins
+require(dplyr)
+starwars <- dplyr::starwars
 gg_color_scatter(
-  df = penguins,
-  x_var = "bill_length_mm",
-  y_var = "body_mass_g",
-  col_var = "species",
+  df = starwars,
+  x_var = "height",
+  y_var = "mass",
+  col_var = "hair_color",
   alpha = 1 / 3,
   size = 2
 )

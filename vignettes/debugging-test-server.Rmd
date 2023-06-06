@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 ```{r pkgs, message=FALSE, warning=FALSE}
 library(dbap)
 library(dplyr)
-library(Lahman)
-library(NHANES)
-library(palmerpenguins)
+library(tidyr)
+library(forcats)
+library(lubridate)
 ```
 
 # Overview 
@@ -31,28 +31,28 @@ The output in `dbap` is built by combining the `mod_pkg_data` and `mod_select_va
 
 ## `mod_pkg_data`
 
-`mod_pkg_data` uses the `get_pkgs_with_dfs()` and functions to populate the first `selectInput()` in the `sidebarPanel()`:
+`mod_pkg_data` uses the `pkg_nms_with_data_frames()` and functions to populate the first `selectInput()` in the `sidebarPanel()`:
 
-```{r get_pkgs_with_dfs}
+```{r pkg_nms_with_data_frames}
 # get packages with data.frames/tibbles
-pkgs <- get_pkgs_with_dfs()
+pkgs <- pkg_nms_with_data_frames()
 pkgs
  
 ```
 
-The `input$pkg` is passed `get_pkg_df_names()` to list the datasets as `input$data`:
+The `input$pkg` is passed `pkg_data_frame_nms()` to list the datasets as `input$data`:
 
-```{r get_pkg_df_names}
+```{r pkg_data_frame_nms}
 # select package with data.frames/tibbles
 pkg <- pkgs['dplyr']
 pkg
-get_pkg_df_names(pkg = pkg)
+pkg_data_frame_nms(pkg = pkg)
 ```
 
 The package (`pkg`) and dataset (`pkg_ds`) are passed into `get()` to retrieve the reactive `pkg_data()`:
 
 ```{r}
-pkg_ds <- get_pkg_df_names(pkg = pkg)[4] # pull starwars data
+pkg_ds <- pkg_data_frame_nms(pkg = pkg)[4] # pull starwars data
 pkg_data <- base::get(x = pkg_ds, 
                       pos = paste0("package:", pkg))
 dplyr::glimpse(pkg_data)

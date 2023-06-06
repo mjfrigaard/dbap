@@ -21,8 +21,8 @@ Make x, y, color plot title
 }
 \examples{
 make_x_y_color_title(
-  x = "imdb_rating",
-  y = "audience_score",
-  color = "mpaa_rating"
+  x = "height",
+  y = "mass",
+  color = "hair_color"
 )
 }

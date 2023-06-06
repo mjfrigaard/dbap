@@ -5,14 +5,14 @@
 #'
 #' @return data object
 #'
-#' @export get_data
+#' @export pkg_data_object
 #'
 #' @importFrom stringr str_remove_all str_replace_all
 #'
 #' @examples
-#' get_data("gss_cat", "forcats")
-#' get_data("starwars", "dplyr")
-get_data <- function(ds, pkg) {
+#' pkg_data_object("gss_cat", "forcats")
+#' pkg_data_object("starwars", "dplyr")
+pkg_data_object <- function(ds, pkg) {
   objname <- stringr::str_remove_all(ds, " .*")
   e <- loadNamespace(pkg)
   if (!exists(ds, envir = e)) {

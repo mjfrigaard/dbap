@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils_scatter.R
 \name{make_x_y_title}
 \alias{make_x_y_title}
-\title{Make x,y plot title}
+\title{Make x, y plot title}
 \usage{
 make_x_y_title(x, y)
 }
@@ -17,11 +17,11 @@ make_x_y_title(x, y)
 String for plot title
 }
 \description{
-Make x,y plot title
+Make x, y plot title
 }
 \examples{
 make_x_y_title(
-  x = "imdb_rating",
-  y = "audience_score"
+  x = "height",
+  y = "mass"
 )
 }

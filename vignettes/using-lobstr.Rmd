@@ -25,8 +25,10 @@ This vignette is an attempt to use the [`lobstr` package](https://lobstr.r-lib.o
 ```{r pkgs, message=FALSE, warning=FALSE}
 library(dbap)
 library(lobstr)
-library(NHANES)
-library(palmerpenguins)
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(lubridate)
 library(fs)
 library(shiny)
 ```

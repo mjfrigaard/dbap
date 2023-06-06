@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "skimApp",
+        "query": "pkgs_nms_with_data_frames",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 7,
+        "resultsCount": 15,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true
