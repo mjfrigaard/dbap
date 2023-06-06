@@ -6,13 +6,18 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `dbap` is to demonstrate how debugging functions within a
-shiny application package using
-[`testthat`](https://testthat.r-lib.org/),
+The goal of `dbap` is to demonstrate debugging functions within a shiny
+application package using [`testthat`](https://testthat.r-lib.org/),
 [`shiny::testServer()`](https://search.r-project.org/CRAN/refmans/shiny/html/testServer.html),
-and RStudio’s debugger.
+and RStudio’s debugger. Check out [this blog
+post](https://mjfrigaard.github.io/posts/debugging/) for more
+information.
 
 ## Installation
 
-The examples for this package are contained in the vignette,
-`"debugging-test-server"`.
+``` r
+install.packages("remotes")
+remotes::install_github("mjfrigaard/dbap")
+```
+
+The examples for this package are contained in the vignettes.
