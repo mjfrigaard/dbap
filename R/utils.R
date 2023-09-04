@@ -17,7 +17,6 @@
 #'
 #' @export df_skim
 #'
-#' @importFrom skimr skim_with skim sfl
 #' @examples
 #' require(dplyr)
 #' df_skim(dplyr::starwars)

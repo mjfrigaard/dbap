@@ -3,7 +3,6 @@
 #' @return A named vector of packages with `data.frame` objects
 #' @export pkg_nms_with_data_frames
 #'
-#' @importFrom purrr map_vec
 #'
 #' @examples
 #' pkg_nms_with_data_frames()

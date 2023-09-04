@@ -5,10 +5,6 @@
 #'
 #' @export pkgdataApp
 #'
-#' @importFrom lobstr tree
-#' @importFrom shiny fluidPage sidebarLayout reactiveValuesToList
-#' @importFrom shiny sidebarPanel shinyApp h3 code
-#' @importFrom shiny mainPanel verbatimTextOutput renderPrint
 pkgdataApp <- function() {
   require(tidyr)
   require(dplyr)

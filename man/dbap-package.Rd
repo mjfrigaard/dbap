@@ -4,7 +4,7 @@
 \name{dbap-package}
 \alias{dbap}
 \alias{dbap-package}
-\title{dbap: Test Your Shiny App Package with RStudio'd debugger}
+\title{dbap: Shiny App Package to be used for debugging/testing}
 \description{
 This shiny app-package was developed to demonstrate testing with testthat, shiny's testServer(), and the debugger.
 }

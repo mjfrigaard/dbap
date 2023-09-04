@@ -7,5 +7,5 @@
 appUI()
 }
 \description{
-App UI
+Application standalone app function
 }

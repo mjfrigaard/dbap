@@ -32,7 +32,7 @@ check_pkg_ns <- function(pkg, quiet = FALSE) {
         stop(paste0(pkg, " not available"))
       }
     } else {
-      cat(paste0("Package ", pkg, " loaded\n"))
+      cat(paste0("\nPackage ", pkg, " loaded"))
     }
   } else {
     # without messages

@@ -27,5 +27,9 @@ Imports:
     stringr,
     testthat,
     vdiffr,
-    zeallot,
+    lobstr,
+    tibble,
+    purrr,
+    snakecase,
+    glue,
     rlang

@@ -28,9 +28,6 @@
 #'
 #' @export pkg_data_str
 #'
-#' @importFrom purrr map2 map
-#' @importFrom stringr str_detect
-#' @importFrom dplyr mutate filter
 #'
 #' @examples
 #' require(forcats)
@@ -70,9 +67,9 @@ pkg_data_str <- function(pkg) {
               NULL,
               c(
                 "Package", "Item", "Title",
-                "Class", "Columns", "Rows",
-                "Logical", "Numeric", "Character",
-                "Factor", "List"
+                "Class", "Cols", "Rows",
+                "lgl", "dbl/int", "chr",
+                "fct", "list"
               )
             )
           ),
@@ -86,23 +83,23 @@ pkg_data_str <- function(pkg) {
 
       # df_tbl contains 'data.frame' classes
       dplyr::mutate(df_tbl,
-        Columns = purrr::map(.x = ds_list, .f = ncol) |>
+        Cols = purrr::map(.x = ds_list, .f = ncol) |>
           purrr::map(paste0, " columns") |> unlist(),
         Rows = purrr::map(.x = ds_list, .f = nrow) |>
           purrr::map(paste0, " rows") |> unlist(),
-        Logical = purrr::map(
+        lgl = purrr::map(
           .x = ds_list,
           .f = col_type_count, "log") |> unlist(),
-        Numeric = purrr::map(
+        `dbl/int` = purrr::map(
           .x = ds_list,
           .f = col_type_count, "num") |> unlist(),
-        Character = purrr::map(
+        chr = purrr::map(
           .x = ds_list,
           .f = col_type_count, "chr") |> unlist(),
-        Factor = purrr::map(
+        fct = purrr::map(
           .x = ds_list,
           .f = col_type_count, "fct") |> unlist(),
-        List = purrr::map(
+        list = purrr::map(
           .x = ds_list,
           .f = col_type_count, "lst") |> unlist())
 

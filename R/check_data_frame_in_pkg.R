@@ -21,7 +21,6 @@
 #'
 #' @seealso [check_pkg_inst()]
 #'
-#' @importFrom purrr map_lgl
 #'
 #' @examples
 #' check_data_frame_in_pkg("dplyr")

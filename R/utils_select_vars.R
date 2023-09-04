@@ -7,7 +7,6 @@
 #' @return data.frame/tibble filtered by function
 #' @export pull_type_cols
 #'
-#' @importFrom rlang as_function
 #'
 pull_type_cols <- function(data, filter) {
   fun <- rlang::as_function(filter)

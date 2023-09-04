@@ -7,7 +7,6 @@
 #'
 #' @export pkg_data_object
 #'
-#' @importFrom stringr str_remove_all str_replace_all
 #'
 #' @examples
 #' pkg_data_object("gss_cat", "forcats")

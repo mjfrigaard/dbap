@@ -1,27 +1,24 @@
 #' App UI
 #'
-#' @importFrom shiny tagList fluidPage sidebarLayout
-#' @importFrom shiny sidebarPanel mainPanel br h3 code
-#' @importFrom shiny fluidRow code verbatimTextOutput
+#' Application standalone app function
 #'
 #' @export appUI
 appUI <- function() {
-  shiny::tagList(
-    shiny::fluidPage(
-      shiny::sidebarLayout(
-        shiny::sidebarPanel(
+  tagList(
+    fluidPage(
+      sidebarLayout(
+        sidebarPanel(
           mod_pkg_data_ui("data")
           ),
-        shiny::mainPanel(
-          shiny::h3(
-            shiny::code("pkgdataApp()")),
-          shiny::fluidRow(
-            shiny::column(width = 12,
+        mainPanel(
+          br(),
+          fluidRow(
+            column(width = 12,
               mod_pkg_data_str_ui("str"))
           ),
           mod_select_vars_ui("vars"),
-          shiny::verbatimTextOutput("skim"),
-          shiny::verbatimTextOutput("ids")
+          verbatimTextOutput("skim"),
+          verbatimTextOutput("ids")
         )
       )
     )

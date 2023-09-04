@@ -8,7 +8,6 @@
 #' Check if `pkg` is installed with `require()`. If not, package is
 #' installed with `install.packages(quietly = TRUE)`.
 #'
-#' @importFrom purrr map_vec walk
 #'
 #' @examples
 #' # remove.packages('janitor')

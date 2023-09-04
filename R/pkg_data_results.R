@@ -7,8 +7,6 @@
 #' @export pkg_data_results
 #'
 #'
-#' @importFrom tibble as_tibble
-#'
 #' @examples
 #' pkg_data_results("lubridate")
 #' pkg_data_results("dplyr")

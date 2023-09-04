@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "pkgDataApp",
+        "query": "@importFrom",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 9,
+        "resultsCount": 43,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true
