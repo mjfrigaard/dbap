@@ -9,5 +9,4 @@ pkgload::load_all(
   )
 
 library(dbap)
-dbap::pkgDataApp()
-# rsconnect::deployApp()
+dbap::pkgdataApp()

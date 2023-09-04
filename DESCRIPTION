@@ -1,6 +1,6 @@
 Package: dbap
 Type: Package
-Title: Test Your Shiny App Package with RStudio'd debugger
+Title: Shiny App Package to be used for debugging/testing
 Version: 0.1.0
 Author: Martin Frigaard
 Maintainer: Martin Frigaard <mjfrigaard@pm.me>

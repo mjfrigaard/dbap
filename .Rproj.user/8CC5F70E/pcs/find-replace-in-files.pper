@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "dbApp",
+        "query": "pkgDataApp",
         "path": "",
         "regex": false,
         "caseSensitive": true,

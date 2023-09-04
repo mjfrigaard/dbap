@@ -2,12 +2,12 @@
     "sortOrder": [
         {
             "columnIndex": 2,
-            "ascending": false
+            "ascending": true
         },
         {
             "columnIndex": 4,
             "ascending": false
         }
     ],
-    "path": "~/projects/apps/dbap/R"
+    "path": "~/projects/pkgs/apps/dbap"
 }
